@@ -22,7 +22,10 @@ func main() {
 	r.POST("/register", handlers.Register)
 
 	auth := r.Group("/")
-	auth.Use(middleware.MidwareAuth())
+	auth.Use(
+		middleware.MidwareAuth(),
+		middleware.RateLimitByUser(5, 10),
+	)
 
 	//	auth.POST("/test", handlers.Test)
 
@@ -30,6 +33,7 @@ func main() {
 
 	admin.Use(
 		middleware.MidwareAuth(),
+		middleware.RateLimitByUser(5, 10),
 		middleware.CheckRole("admin"),
 	)
 

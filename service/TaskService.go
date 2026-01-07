@@ -34,3 +34,11 @@ func (r *TaskService) UpdateTask(task *models.Task) error {
 func (r *TaskService) DeleteTask(id int) error {
 	return r.taskRepo.DeleteTask(id)
 }
+
+func (r *TaskService) GetTaskByUserAndId(userId int, taskId int) (models.Task, error) {
+	return r.taskRepo.GetTaskByUserAndId(userId, taskId)
+}
+
+func (r *TaskService) GetTaskByUser(userId int) ([]models.Task, error) {
+	return r.taskRepo.GetTaskByUser(userId)
+}
