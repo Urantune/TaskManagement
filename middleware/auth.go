@@ -66,7 +66,7 @@ var (
 	limiters = make(map[string]*userLimiter)
 )
 
-func RateLimitByUser(rps rate.Limit, burst int) gin.HandlerFunc {
+func RateLimitByUser(connect rate.Limit, burst int) gin.HandlerFunc {
 
 	go func() {
 		for {
@@ -95,7 +95,7 @@ func RateLimitByUser(rps rate.Limit, burst int) gin.HandlerFunc {
 		ul, exists := limiters[key]
 		if !exists {
 			ul = &userLimiter{
-				limiter: rate.NewLimiter(rps, burst),
+				limiter: rate.NewLimiter(connect, burst),
 			}
 			limiters[key] = ul
 		}
