@@ -1,0 +1,49 @@
+### Login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "admin",
+  "password": "123456789"
+}
+
+> {%
+    client.global.set("TOKEN", response.body.token);
+%}
+
+
+#### Access protected route
+#POST http://localhost:8080/admin/addTask
+#Authorization: {{TOKEN}}
+#Content-Type: application/json
+#
+#
+#{
+#  "name": "test",
+#  "status": "Ok",
+#  "user_id": 1
+#}
+
+### ListTask
+#POST http://localhost:8080/admin/listTask
+#Authorization: {{TOKEN}}
+
+
+###Edit Task
+#POST http://localhost:8080/admin/editTask/4
+#Authorization: {{TOKEN}}
+#Content-Type: application/json
+#
+#{
+#    "name": "Dc"
+#}
+
+
+##Delete Task
+POST http://localhost:8080/admin/deleteTask/11
+Authorization: {{TOKEN}}
+
+
+
+
+

@@ -24,7 +24,7 @@ func main() {
 	auth := r.Group("/")
 	auth.Use(middleware.MidwareAuth())
 
-	auth.POST("/test", handlers.Test)
+	//	auth.POST("/test", handlers.Test)
 
 	admin := r.Group("/admin")
 
@@ -33,7 +33,15 @@ func main() {
 		middleware.CheckRole("admin"),
 	)
 
-	admin.POST("/adminTest", handlers.TestAdminTask)
+	//	admin.POST("/adminTest", handlers.TestAdminTask)
+
+	admin.POST("/addTask", handlers.CreateTask)
+
+	admin.POST("/listTask", handlers.ListTask)
+
+	admin.POST("/editTask/:id", handlers.EditTask)
+
+	admin.POST("/deleteTask/:id", handlers.DeleteTask)
 
 	r.Run(":8080")
 
