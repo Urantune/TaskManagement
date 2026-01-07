@@ -1,0 +1,19 @@
+### Login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "admin",
+  "password": "123456789"
+}
+
+> {%
+    client.global.set("TOKEN", response.body.token);
+%}
+
+
+### Access protected route
+POST http://localhost:8080/admin/adminTest
+Authorization: {{TOKEN}}
+
+
